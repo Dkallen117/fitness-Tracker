@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const Workout = require('../models/workout');
+const Workout = require('../models/workout.js');
 
 mongoose.connect('mongodb://localhost/fitnessTracker', {
   useNewUrlParser: true,
   useFindAndModify: false,
-  useUnifiedTopology: true,
 });
 
 const workoutSeed = [
