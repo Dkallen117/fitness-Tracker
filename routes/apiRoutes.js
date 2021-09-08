@@ -3,73 +3,50 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
-router.post("/api/workouts", async (req, res) => {
-
-    try {
-        
-        const workoutCreateData = await Workout.create({});
-
-        res.json(workoutCreateData);
-
-    } catch (err) {
-
+router.post("/api/workouts", ({ body }, res) => {
+    Workout.create({})
+      .then((dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch(({ err }) => {
         console.log(err);
-        
-    }
-
-});
-
-router.put("/api/workouts/:id", async (req, res) => {
+      });
+  });
   
-    try {
-
-        const workoutUpdateData = await Workout.findOneAndUpdate(
-            { _id: req.params.id },
-            { $push: { exercises: req.body } },
-            { new: true }
-          );
-
-          res.json(workoutUpdateData);
-        
-    } catch (err) {
-        
-        res.json(err);
-
-    }
-
-});
-
-router.get("/api/workouts/range", (req, res) => {
-
-    try {
-
-        const rangedWorkoutData = Workout.find({})
-        .limit(7);
-
-        res.json(rangedWorkoutData);
-        
-    } catch (err) {
-      
-        res.json(err);
-        
-    }
-
-});
-
-router.get("/api/workouts", (req, res) => {
+  router.put("/api/workouts/:id", ({ params, body }, res) => {
   
-    try {
-
-        const allWorkoutData = Workout.find({});
-       
-
-        res.json(allWorkoutData);
-        
-    } catch (err) {
-      
+    Workout.findOneAndUpdate(
+      { _id: params.id },
+      { $push: { exercises: body } },
+      { new: true }
+    )
+      .then((dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch((err) => {
         res.json(err);
-        
-    }
-});
+      });
+  });
+  
+  router.get("/api/workouts/range", (req, res) => {
+    Workout.find({})
+      .limit(7)
+      .then((dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
+  
+  router.get("/api/workouts", (req, res) => {
+    Workout.find({})
+      .then((dbWorkout) => {
+        res.json(dbWorkout);
+      })
+      .catch((err) => {
+        res.json(err);
+      });
+  });
 
 module.exports = router;
