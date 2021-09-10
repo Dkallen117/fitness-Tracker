@@ -31,6 +31,9 @@ router.put("/api/workouts/:id", (req, res) => {
   
   router.get("/api/workouts/range", (req, res) => {
     Workout.find({})
+      .sort({
+        day: "desc" //Sort by Date Added DESC
+    })
       .limit(7)
       .then((dbWorkout) => {
         res.json(dbWorkout);
@@ -45,7 +48,7 @@ router.put("/api/workouts/:id", (req, res) => {
     Workout.find({}).then(dbWorkout => {
 
         dbWorkout.forEach(workout => {
-            var total = 0;
+            let total = 0;
             workout.exercises.forEach(e => {
                 total += e.duration;
             });
