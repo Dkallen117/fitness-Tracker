@@ -32,7 +32,7 @@ router.put("/api/workouts/:id", (req, res) => {
   router.get("/api/workouts/range", (req, res) => {
     Workout.find({})
       .sort({
-        day: "desc" //Sort by Date Added DESC
+        day: "asc" //Sort by Date Added DESC
     })
       .limit(7)
       .then((dbWorkout) => {

@@ -9,45 +9,7 @@ mongoose.connect('mongodb+srv://Dkallen117:Legendary117@startercluster.axari.mon
 const db = mongoose.connection;
 
 const workoutSeed = [
-  {
-    day: new Date(new Date().setDate(new Date().getDate() - 9)),
-    exercises: [
-      {
-        type: 'resistance',
-        name: 'Bicep Curl',
-        duration: 20,
-        weight: 100,
-        reps: 10,
-        sets: 4,
-      },
-    ],
-  },
-  {
-    day: new Date(new Date().setDate(new Date().getDate() - 8)),
-    exercises: [
-      {
-        type: 'resistance',
-        name: 'Lateral Pull',
-        duration: 20,
-        weight: 300,
-        reps: 10,
-        sets: 4,
-      },
-    ],
-  },
-  {
-    day: new Date(new Date().setDate(new Date().getDate() - 7)),
-    exercises: [
-      {
-        type: 'resistance',
-        name: 'Push Press',
-        duration: 25,
-        weight: 185,
-        reps: 8,
-        sets: 4,
-      },
-    ],
-  },
+ 
   {
     day: new Date(new Date().setDate(new Date().getDate() - 6)),
     exercises: [
