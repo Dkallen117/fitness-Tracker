@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Workout = require('../models/workout.js');
 
-mongoose.connect('mongodb+srv://Dkallen117:Legendary117@startercluster.axari.mongodb.net/fitnessTracker?retryWrites=true&w=majority', {
+mongoose.connect('mongodb://localhost/fitnessTracker', {
   useNewUrlParser: true,
   useFindAndModify: false,
 });
