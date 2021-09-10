@@ -29,19 +29,31 @@ router.put("/api/workouts/:id", (req, res) => {
 
 });
   
-  router.get("/api/workouts/range", (req, res) => {
-    Workout.find({})
-      .sort({
-        day: "asc" //Sort by Date Added DESC
-    })
-      .limit(7)
-      .then((dbWorkout) => {
-        res.json(dbWorkout);
-      })
-      .catch((err) => {
-        res.json(err);
-      });
-  });
+  router.get("/api/workouts/range", async (req, res) => {
+  try {
+
+      const theLastSevenWorkouts = await Workout.aggregate([
+          {
+              $addFields: {
+                  totalDuration: {
+                      $sum: `$exercises.duration`,
+                  },
+                  combinedWeight: {
+                      $sum: `exercises.weight`,
+                  }
+              },
+
+          },
+          { $sort: { day: -1 } }, //descending order
+
+      ]).limit(7);
+
+      res.status(200).json(theLastSevenWorkouts);
+  } catch (error) {
+      console.log(error);
+      res.status(500).json(error);
+  }
+});
   
   router.get("/api/workouts", (req, res) => {
 

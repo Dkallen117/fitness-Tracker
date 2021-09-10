@@ -5,9 +5,7 @@ mongoose.connect('mongodb://localhost/fitnessTracker', {
   useNewUrlParser: true,
   useFindAndModify: false,
 });
-
 const db = mongoose.connection;
-
 const workoutSeed = [
  
   {
@@ -87,9 +85,7 @@ const workoutSeed = [
     ],
   },
 ];
-
 db.once('open', function callback () { 
-
 Workout.deleteMany({})
   .then(() => Workout.collection.insertMany(workoutSeed))
   .then((data) => {
