@@ -186,15 +186,9 @@ function populateChart(data) {
 }
 
 function duration(data) {
-  let durations = [];
+ 
+  return data.map(workout => workout.totalDuration ?? 0);
 
-  data.forEach(workout => {
-    workout.exercises.forEach(exercise => {
-      durations.push(exercise.duration);
-    });
-  });
-
-  return durations;
 }
 
 function calculateTotalWeight(data) {
